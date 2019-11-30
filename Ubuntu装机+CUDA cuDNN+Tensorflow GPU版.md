@@ -58,7 +58,7 @@ sudo service xrdp restart
 ```
 
 ## 自动升级NVDIA显卡驱动
-Software&Update--->Additional Drivers--->recommended
+Software&Update--->Additional Drivers--->Recommended
 ```bash
 reboot
   #等待系统重启……
@@ -73,12 +73,6 @@ ifconfig
 sudo apt install gnome-tweak-tool
 sudo apt install libinput-tools
 sudo apt install fonts-wqy-microhei fonts-wqy-zenhei
-sudo dpkg -i sogoupinyin_*_amd64.deb
-  #缺乏依赖则：sudo apt install -f
-```
-Settings--->Region&Language--->fcitx
-Fctix Configuration--->+添加搜狗拼音
-```bash
 sudo apt install docky
 sudo apt install neofetch
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
@@ -92,49 +86,57 @@ sudo sh -c "echo 'deb http://download.opensuse.org/repositories/home:/manuelschn
 sudo apt update
 sudo apt install albert
 sudo apt install python-gi python-gi-cairo python3-gi python3-gi-cairo gir1.2-gtk-3.0
-sudo pip3 install popupdict
+sudo pip3 install popupdictsudo 
 ```
-* 安装Anaconda3:
+
+* 安装搜狗拼音
+```bash
+dpkg -i sogoupinyin_*_amd64.deb
+  #缺乏依赖则：sudo apt install -f
+```
+Settings--->Region&Language--->fcitx
+Fctix Configuration--->+添加搜狗拼音
+
+* 安装Anaconda3
 ```bash
 bash ~/Downloads/Anaconda3-5.2.0-Linux-x86_64.sh
 conda --version
   #输出5.2.0说明Anaconda安装成功
+ ```
+** 配置TensorFlow环境
 conda create --name tf_gpu_env tensorflow-gpu
   #以上为最新版TensorFlow,若需要低版本,如1.8：conda create --name tf_1.8_gpu_env tensorflow-gpu=1.8 python=3.6
 source activate tf_gpu_env
   #与上一步骤环境名保持一致,如1.8：source activate tf_1.8_gpu_env
 #source deactivate
+
+** 安装jupyter notebook
+```bash
 conda install jupyter notebook
+jt -t chesterish -f firacode -fs 13 -cellw 90% -ofs 11 -dfs 11 -mathfs 120 -cursw 3 -cursc o -T -N -kl
+```
+
+** 安装Spyder
+```bash
 conda install spyder
+```
+```bash
 conda info
   #查询安装信息
 conda list
   #查询已经安装的库
 conda update 
   #更新库
+```bash
 
 #Spyder打不开
-
 pip install --upgrade QtPy PyQt5
-
 #查看所有可更新的模块
-
 pip list --outdated
-
 pip install --upgrade -i https://pypi.douban.com/simple [moudle_name]
-
 #更新所有的模块
-
 pip-review --local --interactive
-
 source ~/.bashrc
-source ~/.zshrc
-
-# 多版本切换（ java 等）
-
-sudo update-alternatives --install <link> <name> <path> <priority>
-sudo update-alternatives --remove <name> <path>
-sudo update-alternatives --config <name>
 
 #查看tensorflow版本和安装路径
 python
@@ -142,4 +144,3 @@ import tensorflow as tf
 tf.__version__
 tf.__path__
 
-jt -t chesterish -f firacode -fs 13 -cellw 90% -ofs 11 -dfs 11 -mathfs 120 -cursw 3 -cursc o -T -N -kl
