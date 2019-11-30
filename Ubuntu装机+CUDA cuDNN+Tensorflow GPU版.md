@@ -8,44 +8,20 @@ Accounts--->Auto Login
 
 ## 下载各类安装包(先开始以节省时间)
 * Anaconda3:https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.2.0-Linux-x86_64.sh
-</br>
 * Pycharm:https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=linux&code=PCC
-</br>
 * 搜狗输入法:https://pinyin.sogou.com/linux/?r=pinyin
-</br>
 * WPS:https://wdl1.cache.wps.cn/wps/download/ep/Linux2019/8722/wps-office_11.1.0.8722_amd64.deb
 
-## 更新软件源
-'''
-sudo apt-get update
-sudo apt-get dist-upgrade
-'''
-
 ## 创建用户
-'''
+```bash
 sudo passwd root
 sudo gpasswd -a $USER input
-'''
+```
 
-## 配置远程访问
-
-sudo apt install openssh-server
-systemctl status sshd.service #查看服务状态
-vim/etc/ssh/sshd_config #服务器端配置文件
-vim/etc/ssh/ssh_config # 客户端配置文件默认配置文件
-vim ~/.ssh/config #用户配置文件
-sudo apt-get install dconf-editor
-Dconf-editor--->org > gnome > desktop > remote-access，取消requlre-encryption
-sudo apt-get install xrdp
-sudo apt-get install vnc4server
-sudo apt-get install tightvncserver
-sudo apt-get install xubuntu-desktop
-sudo apt-get isntall gnome
-echo "xfce4-session" >~/.xsession
-#sudo vim /etc/xrdp/startwm.sh
-#在./etc/X11/Xsession前一行输入xfce4-session
-sudo service xrdp restart
-
+## 安装基本包
+```bash
+sudo apt-get update
+sudo apt-get dist-upgrade
 sudo apt install pip
 sudo apt install python3-pip
 sudo apt-get install git
@@ -57,21 +33,52 @@ sudo apt install fcitx
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update
 sudo apt-get install dkms synaptic build-essential
+```
 
+## 配置远程访问
+```bash
+sudo apt-get install dconf-editor
+sudo apt install openssh-server
+systemctl status sshd.service
+sudo vim /etc/ssh/sshd_config
+sudo vim /etc/ssh/ssh_config
+sudo vim ~/.ssh/config
+```
+Dconf-editor--->org > gnome > desktop > remote-access，取消requlre-encryption
+```bash
+sudo apt-get install xrdp
+sudo apt-get install vnc4server
+sudo apt-get install tightvncserver
+sudo apt-get install xubuntu-desktop
+sudo apt-get isntall gnome
+echo "xfce4-session" >~/.xsession
+  #sudo vim /etc/xrdp/startwm.sh
+  #在./etc/X11/Xsession前一行输入xfce4-session
+sudo service xrdp restart
+```
+
+## 自动升级NVDIA显卡驱动
 Software&Update--->Additional Drivers--->recommended
+```bash
 reboot
+  #等待系统重启……
 nvidia-smi
-#输出显卡当前的状态说明驱动安装成功
+  #输出显卡当前的状态说明驱动安装成功
 ifconfig
-#获取远程IP
+  #获取远程IP,记下
+```
 
+## 配置系统附件
+```bash
 sudo apt install gnome-tweak-tool
 sudo apt install libinput-tools
 sudo apt install fonts-wqy-microhei fonts-wqy-zenhei
 sudo dpkg -i sogoupinyin_*_amd64.deb
-#缺乏依赖则：sudo apt install -f
+  #缺乏依赖则：sudo apt install -f
+```
 Settings--->Region&Language--->fcitx
 Fctix Configuration--->+添加搜狗拼音
+```bash
 sudo apt install docky
 sudo apt install neofetch
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
@@ -86,30 +93,25 @@ sudo apt update
 sudo apt install albert
 sudo apt install python-gi python-gi-cairo python3-gi python3-gi-cairo gir1.2-gtk-3.0
 sudo pip3 install popupdict
-
+```
+* 安装Anaconda3:
+```bash
 bash ~/Downloads/Anaconda3-5.2.0-Linux-x86_64.sh
 conda --version
-#输出5.2.0说明Anaconda安装成功
+  #输出5.2.0说明Anaconda安装成功
 conda create --name tf_gpu_env tensorflow-gpu
-#或者：conda create --name tf_1.8_gpu_env tensorflow-gpu=1.8 python=3.6
+  #以上为最新版TensorFlow,若需要低版本,如1.8：conda create --name tf_1.8_gpu_env tensorflow-gpu=1.8 python=3.6
 source activate tf_gpu_env
-#或者：source activate tf_1.8_gpu_env
+  #与上一步骤环境名保持一致,如1.8：source activate tf_1.8_gpu_env
 #source deactivate
 conda install jupyter notebook
 conda install spyder
-#查询安装信息
 conda info
-#查询已经安装的库
+  #查询安装信息
 conda list
-#更新库
+  #查询已经安装的库
 conda update 
-
-anaconda search -t conda tensorflow
-anaconda show aaronzs/tensorflow-gpu
-#anaconda show jjh_cio_testing/tensorflow-gpu
-
-conda install -c https://conda.anaconda.org/anaconda/linux-64 tensorflow=1.8
-pip install --ignore-installed tensorflow-gpu
+  #更新库
 
 #Spyder打不开
 
